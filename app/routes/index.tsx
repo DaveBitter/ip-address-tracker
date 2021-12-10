@@ -1,100 +1,67 @@
-import type { MetaFunction, LoaderFunction } from "remix";
-import { useLoaderData, json, Link } from "remix";
+import { useEffect, useState } from 'react';
+import { Outlet } from 'remix';
 
-type IndexData = {
-  resources: Array<{ name: string; url: string }>;
-  demos: Array<{ name: string; to: string }>;
-};
+let ReactLeaflet: any;
 
-// Loaders provide data to components and are only ever called on the server, so
-// you can connect to a database or run any server side code you want right next
-// to the component that renders it.
-// https://remix.run/api/conventions#loader
-export let loader: LoaderFunction = () => {
-  let data: IndexData = {
-    resources: [
-      {
-        name: "Remix Docs",
-        url: "https://remix.run/docs"
-      },
-      {
-        name: "React Router Docs",
-        url: "https://reactrouter.com/docs"
-      },
-      {
-        name: "Remix Discord",
-        url: "https://discord.gg/VBePs6d"
-      }
-    ],
-    demos: [
-      {
-        to: "demos/actions",
-        name: "Actions"
-      },
-      {
-        to: "demos/about",
-        name: "Nested Routes, CSS loading/unloading"
-      },
-      {
-        to: "demos/params",
-        name: "URL Params and Error Boundaries"
-      }
-    ]
-  };
-
-  // https://remix.run/api/remix#json
-  return json(data);
-};
-
-// https://remix.run/api/conventions#meta
-export let meta: MetaFunction = () => {
-  return {
-    title: "Remix Starter",
-    description: "Welcome to remix!"
-  };
-};
-
-// https://remix.run/guides/routing#index-routes
 export default function Index() {
-  let data = useLoaderData<IndexData>();
+  const position = [52.3139713, 4.9419641]
+  const [hasWindowAndLeaflet, setHasWindowAndLeaflet] = useState(false);
+
+  useEffect(() => {
+    import('react-leaflet').then(reactLeaflet => {
+      ReactLeaflet = reactLeaflet;
+      setHasWindowAndLeaflet(true)
+    })
+
+  }, [])
 
   return (
-    <div className="remix__page">
-      <main>
-        <h2>Welcome to Remix!</h2>
-        <p>We're stoked that you're here. 🥳</p>
-        <p>
-          Feel free to take a look around the code to see how Remix does things,
-          it might be a bit different than what you’re used to. When you're
-          ready to dive deeper, we've got plenty of resources to get you
-          up-and-running quickly.
-        </p>
-        <p>
-          Check out all the demos in this starter, and then just delete the{" "}
-          <code>app/routes/demos</code> and <code>app/styles/demos</code>{" "}
-          folders when you're ready to turn this into your next project.
-        </p>
+    <div className='h-screen'>
+      <header className='h-96 lg:h-auto bg-[url("/img/streets-pattern.png")] bg-no-repeat bg-cover'>
+        <div className='relative flex flex-col gap-6 mx-6 lg:mx-0 justify-center items-center h-64 translate-y-48 lg:translate-y-12' style={{ zIndex: 500 }}>
+          <h1 className='text-3xl text-white font-medium'>IP Address Tracker</h1>
+          <form className='w-full lg:w-96 relative' method='post'>
+            <label htmlFor="ip" className='sr-only'>IP address or domain</label>
+            <input id="ip" className='w-full p-4 pr-14 rounded-2xl' placeholder='Search for any IP address or domain'></input>
+            <button type='submit' className='w-14 h-full absolute top-0 right-0 rounded-r-2xl bg-black' />
+          </form>
+          <dl className='flex flex-col lg:flex-row justify-between items-stretch w-full lg:w-auto mt-4 lg:py-12 rounded-2xl bg-white'>
+            <div className='flex flex-col py-6 lg:py-0 px-12 items-center lg:border-solid lg:border-r-2 lg:border-gray-200'>
+              <dt className='text-gray-400 text-sm font-bold uppercase tracking-widest'>IP address</dt>
+              <dd className='text-gray-700 text-2xl font-bold'>Unavailable</dd>
+            </div>
+            <div className='flex flex-col py-6 lg:py-0 px-12 items-center lg:border-solid lg:border-r-2 lg:border-gray-200'>
+              <dt className='text-gray-400 text-sm font-bold uppercase tracking-widest'>Location</dt>
+              <dd className='text-gray-700 text-2xl font-bold'>Unavailable</dd>
+            </div>
+            <div className='flex flex-col py-6 lg:py-0 px-12 items-center lg:border-solid lg:border-r-2 lg:border-gray-200'>
+              <dt className='text-gray-400 text-sm font-bold uppercase tracking-widest'>Timezone</dt>
+              <dd className='text-gray-700 text-2xl font-bold'>Unavailable</dd>
+            </div>
+            <div className='flex flex-col py-6 lg:py-0 px-12 items-center'>
+              <dt className='text-gray-400 text-sm font-bold uppercase tracking-widest'>ISP</dt>
+              <dd className='text-gray-700 text-2xl font-bold'>Unavailable</dd>
+            </div>
+          </dl>
+        </div>
+      </header>
+      <main className='h-full'>
+        <section className='h-full'>
+          <div id='map' className='h-full bg-gray-500'>
+            {hasWindowAndLeaflet && <ReactLeaflet.MapContainer className='h-full' center={position} zoom={20} scrollWheelZoom={false}>
+              <ReactLeaflet.TileLayer
+                url='https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png'
+              />
+              <ReactLeaflet.Marker position={position}>
+                <ReactLeaflet.Popup>
+                  A pretty CSS3 popup. <br /> Easily customizable.
+                </ReactLeaflet.Popup>
+              </ReactLeaflet.Marker>
+            </ReactLeaflet.MapContainer>}
+          </div>
+          <Outlet />
+        </section>
       </main>
-      <aside>
-        <h2>Demos In This App</h2>
-        <ul>
-          {data.demos.map(demo => (
-            <li key={demo.to} className="remix__page__resource">
-              <Link to={demo.to} prefetch="intent">
-                {demo.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <h2>Resources</h2>
-        <ul>
-          {data.resources.map(resource => (
-            <li key={resource.url} className="remix__page__resource">
-              <a href={resource.url}>{resource.name}</a>
-            </li>
-          ))}
-        </ul>
-      </aside>
     </div>
   );
 }
