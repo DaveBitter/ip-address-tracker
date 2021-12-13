@@ -12,8 +12,6 @@ import type { LinksFunction } from "remix";
 
 import tailwindStyles from "./tailwind.css"
 
-require('dotenv').config()
-
 // https://remix.run/api/app#links
 export let links: LinksFunction = () => {
   return [

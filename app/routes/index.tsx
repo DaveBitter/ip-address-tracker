@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { ActionFunction, Form, Outlet, useActionData } from 'remix';
+import { ActionFunction, Form, LoaderFunction, Outlet, useActionData, useLoaderData } from 'remix';
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
 function validateIP(IP: string) {
   if (IP.length < 2) {
@@ -22,11 +23,6 @@ type ActionData = {
 export const action: ActionFunction = async ({
   request
 }): Promise<Response | ActionData> => {
-  const GEO_IP_API_KEY = process.env.GEO_IP_API_KEY;
-
-  if (!GEO_IP_API_KEY) {
-    throw new Error("GEO_IP_API_KEY must be set");
-  }
 
   const form = await request.formData();
 
@@ -46,19 +42,34 @@ export const action: ActionFunction = async ({
     return { fieldErrors, fields };
   }
 
+  const GEO_IP_API_KEY = 'at_lhknRFKpkdlDUiZmAA7Zmt2EGsvu2';
   const data = await fetch(`https://geo.ipify.org/api/v2/country?apiKey=${GEO_IP_API_KEY}&ipAddress=${IP}`).then(res => res.json())
 
   return { data, fields: { IP } };
 };
 
+type LoaderData = {
+  userIP?: string;
+};
+
+export const loader: LoaderFunction = async ({ }) => {
+  const userIP = await fetch('https://api.ipify.org?format=json').then(res => res.json())
+
+  return { userIP: userIP.ip };
+};
+
 let ReactLeaflet: any;
 
 export default function Index() {
-  const position = [52.3139713, 4.9419641]
   const [hasWindowAndLeaflet, setHasWindowAndLeaflet] = useState(false);
   const actionData = useActionData<
     ActionData | undefined
   >();
+
+  const loaderData = useLoaderData<LoaderData>();
+
+  const ipAddress = actionData?.data?.IP || loaderData?.userIP || ''
+
 
   const ipInputRef = useRef();
   const formRef = useRef();
@@ -71,6 +82,26 @@ export default function Index() {
     })
   }, [])
 
+  const [map, setMap] = useState()
+  const [position, setPosition] = useState([52.3139713, 4.9419641]);
+
+  useEffect(() => {
+    if (!actionData?.data?.location?.country) { return; }
+
+    import('leaflet-geosearch').then(async (leafletGeosearch: any) => {
+      const provider = new leafletGeosearch.OpenStreetMapProvider();
+      const [locationData] = await provider.search({ query: `${actionData.data.location.country} ${actionData.data.location.region}` });
+
+      // @ts-ignore
+      if (locationData && map?.setView) {
+        // @ts-ignore
+        map.setView([locationData.y, locationData.x], 10)
+
+        setPosition([locationData.y, locationData.x])
+      }
+    })
+  }, [ipAddress, map])
+
   return (
     <div className='h-screen'>
       <header className='h-96 lg:h-auto bg-[url("/img/streets-pattern.png")] bg-no-repeat bg-cover'>
@@ -78,7 +109,7 @@ export default function Index() {
           <h1 className='text-3xl text-white font-medium'>IP Address Tracker</h1>
           <Form className='w-full lg:w-96 relative' method='post' ref={formRef}>
             <label htmlFor="ip" className='sr-only'>IP address or domain</label>
-            <input ref={ipInputRef} defaultValue='213.93.179.79' id="ip" name="ip" minLength={7} maxLength={15} size={15} pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" className='w-full p-4 pr-14 rounded-2xl text-gray-700 text-xl font-medium' placeholder='Search for any IP address or domain'></input>
+            <input ref={ipInputRef} defaultValue={ipAddress} id="ip" name="ip" minLength={7} maxLength={15} size={15} pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" className='w-full p-4 pr-14 rounded-2xl text-gray-700 text-xl font-medium' placeholder='Search for any IP address or domain'></input>
             <button type='submit' className='w-14 h-full absolute top-0 right-0 rounded-r-2xl bg-black' />
           </Form>
           <dl className='flex flex-col lg:flex-row justify-between items-stretch w-full lg:w-auto mt-4 lg:py-12 rounded-2xl bg-white'>
@@ -104,7 +135,7 @@ export default function Index() {
       <main className='h-full'>
         <section className='h-full'>
           <div id='map' className='h-full bg-gray-500'>
-            {hasWindowAndLeaflet && <ReactLeaflet.MapContainer className='h-full' center={position} zoom={20} scrollWheelZoom={false}>
+            {hasWindowAndLeaflet && <ReactLeaflet.MapContainer className='h-full' scrollWheelZoom={false} whenCreated={setMap}>
               <ReactLeaflet.TileLayer
                 url='https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png'
               />
