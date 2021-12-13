@@ -1,18 +1,74 @@
-import { useEffect, useState } from 'react';
-import { Outlet } from 'remix';
+import { useEffect, useRef, useState } from 'react';
+import { ActionFunction, Form, Outlet, useActionData } from 'remix';
+
+function validateIP(IP: string) {
+  if (IP.length < 2) {
+    return `That joke's name is too short`;
+  }
+}
+
+type ActionData = {
+  data?: any;
+  formError?: string;
+  fieldErrors?: {
+    name: string | undefined;
+    content?: string | undefined;
+  };
+  fields?: {
+    IP: string;
+  };
+};
+
+export const action: ActionFunction = async ({
+  request
+}): Promise<Response | ActionData> => {
+  const GEO_IP_API_KEY = process.env.GEO_IP_API_KEY;
+
+  if (!GEO_IP_API_KEY) {
+    throw new Error("GEO_IP_API_KEY must be set");
+  }
+
+  const form = await request.formData();
+
+  const IP = form.get("ip");
+
+  if (
+    typeof IP !== "string"
+  ) {
+    return { formError: `Form not submitted correctly.` };
+  }
+
+  const fieldErrors = {
+    name: validateIP(IP)
+  };
+  const fields = { IP };
+  if (Object.values(fieldErrors).some(Boolean)) {
+    return { fieldErrors, fields };
+  }
+
+  const data = await fetch(`https://geo.ipify.org/api/v2/country?apiKey=${GEO_IP_API_KEY}&ipAddress=${IP}`).then(res => res.json())
+
+  return { data, fields: { IP } };
+};
 
 let ReactLeaflet: any;
 
 export default function Index() {
   const position = [52.3139713, 4.9419641]
   const [hasWindowAndLeaflet, setHasWindowAndLeaflet] = useState(false);
+  const actionData = useActionData<
+    ActionData | undefined
+  >();
 
+  const ipInputRef = useRef();
+  const formRef = useRef();
   useEffect(() => {
     import('react-leaflet').then(reactLeaflet => {
       ReactLeaflet = reactLeaflet;
       setHasWindowAndLeaflet(true)
+      // @ts-ignore
+      !actionData?.data && ipInputRef?.current?.value && formRef?.current && formRef?.current?.submit();
     })
-
   }, [])
 
   return (
@@ -20,31 +76,31 @@ export default function Index() {
       <header className='h-96 lg:h-auto bg-[url("/img/streets-pattern.png")] bg-no-repeat bg-cover'>
         <div className='relative flex flex-col gap-6 mx-6 lg:mx-0 justify-center items-center h-64 translate-y-48 lg:translate-y-12' style={{ zIndex: 500 }}>
           <h1 className='text-3xl text-white font-medium'>IP Address Tracker</h1>
-          <form className='w-full lg:w-96 relative' method='post'>
+          <Form className='w-full lg:w-96 relative' method='post' ref={formRef}>
             <label htmlFor="ip" className='sr-only'>IP address or domain</label>
-            <input id="ip" className='w-full p-4 pr-14 rounded-2xl' placeholder='Search for any IP address or domain'></input>
+            <input ref={ipInputRef} defaultValue='213.93.179.79' id="ip" name="ip" minLength={7} maxLength={15} size={15} pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" className='w-full p-4 pr-14 rounded-2xl text-gray-700 text-xl font-medium' placeholder='Search for any IP address or domain'></input>
             <button type='submit' className='w-14 h-full absolute top-0 right-0 rounded-r-2xl bg-black' />
-          </form>
+          </Form>
           <dl className='flex flex-col lg:flex-row justify-between items-stretch w-full lg:w-auto mt-4 lg:py-12 rounded-2xl bg-white'>
             <div className='flex flex-col py-6 lg:py-0 px-12 items-center lg:border-solid lg:border-r-2 lg:border-gray-200'>
               <dt className='text-gray-400 text-sm font-bold uppercase tracking-widest'>IP address</dt>
-              <dd className='text-gray-700 text-2xl font-bold'>Unavailable</dd>
+              <dd className='text-gray-700 text-2xl font-bold'>{actionData?.fields?.IP || 'Unavailable'}</dd>
             </div>
             <div className='flex flex-col py-6 lg:py-0 px-12 items-center lg:border-solid lg:border-r-2 lg:border-gray-200'>
               <dt className='text-gray-400 text-sm font-bold uppercase tracking-widest'>Location</dt>
-              <dd className='text-gray-700 text-2xl font-bold'>Unavailable</dd>
+              <dd className='text-gray-700 text-2xl font-bold'>{actionData?.data?.location?.country || 'Unavailable'}</dd>
             </div>
             <div className='flex flex-col py-6 lg:py-0 px-12 items-center lg:border-solid lg:border-r-2 lg:border-gray-200'>
               <dt className='text-gray-400 text-sm font-bold uppercase tracking-widest'>Timezone</dt>
-              <dd className='text-gray-700 text-2xl font-bold'>Unavailable</dd>
+              <dd className='text-gray-700 text-2xl font-bold'>{actionData?.data?.location?.timezone || 'Unavailable'}</dd>
             </div>
             <div className='flex flex-col py-6 lg:py-0 px-12 items-center'>
               <dt className='text-gray-400 text-sm font-bold uppercase tracking-widest'>ISP</dt>
-              <dd className='text-gray-700 text-2xl font-bold'>Unavailable</dd>
+              <dd className='text-gray-700 text-2xl font-bold'>{actionData?.data?.isp || 'Unavailable'}</dd>
             </div>
           </dl>
         </div>
-      </header>
+      </header >
       <main className='h-full'>
         <section className='h-full'>
           <div id='map' className='h-full bg-gray-500'>
@@ -62,6 +118,6 @@ export default function Index() {
           <Outlet />
         </section>
       </main>
-    </div>
+    </div >
   );
 }
