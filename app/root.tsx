@@ -10,12 +10,14 @@ import {
 } from "remix";
 import type { LinksFunction } from "remix";
 
+import fadesStyles from "./styles/fades.css"
 import tailwindStyles from "./tailwind.css"
 
 // https://remix.run/api/app#links
 export let links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' },
+    { rel: "stylesheet", href: fadesStyles },
     { rel: "stylesheet", href: tailwindStyles }
   ];
 };

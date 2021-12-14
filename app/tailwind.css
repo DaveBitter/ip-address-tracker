@@ -423,7 +423,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.translate-y-48, .lg\:translate-y-12 {
+.translate-y-48, .-translate-x-1\/2, .-translate-y-1\/2, .lg\:translate-y-12 {
   --tw-translate-x: 0;
   --tw-translate-y: 0;
   --tw-rotate: 0;
@@ -437,6 +437,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 .lg\:border-r-2 {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
+}
+
+.shadow-md, .shadow-lg {
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
 }
 
 .sr-only {
@@ -465,6 +472,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .right-0 {
   right: 0px;
+}
+
+.top-1\/2 {
+  top: 50%;
+}
+
+.left-1\/2 {
+  left: 50%;
 }
 
 .mx-6 {
@@ -506,6 +521,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .translate-y-48 {
   --tw-translate-y: 12rem;
+  transform: var(--tw-transform);
+}
+
+.-translate-x-1\/2 {
+  --tw-translate-x: -50%;
+  transform: var(--tw-transform);
+}
+
+.-translate-y-1\/2 {
+  --tw-translate-y: -50%;
   transform: var(--tw-transform);
 }
 
@@ -552,17 +577,29 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-gray-500 {
+.bg-gray-200 {
   --tw-bg-opacity: 1;
-  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
 .bg-\[url\(\"\/img\/streets-pattern\.png\"\)\] {
   background-image: url("/img/streets-pattern.png");
 }
 
+.bg-\[url\(\"\/img\/icons\/arrow\.svg\"\)\] {
+  background-image: url("/img/icons/arrow.svg");
+}
+
 .bg-cover {
   background-size: cover;
+}
+
+.bg-auto {
+  background-size: auto;
+}
+
+.bg-center {
+  background-position: center;
 }
 
 .bg-no-repeat {
@@ -587,6 +624,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-right: 3.5rem;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -605,6 +646,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
 }
 
 .font-medium {
@@ -638,6 +684,39 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
+.shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-lg {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.transition-colors {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.hover\:bg-gray-900:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-gray-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-gray-800:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+
 @media (min-width: 1024px) {
   .lg\:mx-0 {
     margin-left: 0px;
@@ -646,6 +725,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .lg\:h-auto {
     height: auto;
+  }
+
+  .lg\:h-\[calc\(100\%_-_16rem\)\] {
+    height: calc(100% - 16rem);
   }
 
   .lg\:w-96 {
@@ -663,6 +746,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .lg\:flex-row {
     flex-direction: row;
+  }
+
+  .lg\:whitespace-nowrap {
+    white-space: nowrap;
   }
 
   .lg\:border-r-2 {
@@ -686,5 +773,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   .lg\:py-0 {
     padding-top: 0px;
     padding-bottom: 0px;
+  }
+
+  .lg\:text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
   }
 }
