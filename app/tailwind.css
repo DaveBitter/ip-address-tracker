@@ -510,6 +510,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.5rem;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
 .flex {
   display: flex;
 }
@@ -571,6 +575,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .-translate-y-1\/2 {
   --tw-translate-y: -50%;
   transform: var(--tw-transform);
+}
+
+.list-disc {
+  list-style-type: disc;
 }
 
 .flex-col {
@@ -806,6 +814,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .lg\:mb-4 {
     margin-bottom: 1rem;
+  }
+
+  .lg\:ml-0 {
+    margin-left: 0px;
   }
 
   .lg\:h-screen {

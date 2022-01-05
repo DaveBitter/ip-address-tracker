@@ -9,12 +9,6 @@ import { MetaFunction, NavLink, Outlet } from "remix";
 export const links = () => [
     {
         rel: "preload",
-        href: "/img/icons/pin.svg",
-        as: "image",
-        type: "image/svg+xml"
-    },
-    {
-        rel: "preload",
         href: "/img/streets-pattern.png",
         as: "image",
         type: "image/png"
