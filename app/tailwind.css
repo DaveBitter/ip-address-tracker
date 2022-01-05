@@ -554,6 +554,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-width: 20rem;
 }
 
+.max-w-full {
+  max-width: 100%;
+}
+
 .translate-y-48 {
   --tw-translate-y: 12rem;
   transform: var(--tw-transform);
@@ -603,6 +607,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .gap-6 {
   gap: 1.5rem;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
 }
 
 .rounded-2xl {
@@ -802,6 +818,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .lg\:h-\[calc\(100\%_-_16rem\)\] {
     height: calc(100% - 16rem);
+  }
+
+  .lg\:h-\[calc\(100\%_-_18rem\)\] {
+    height: calc(100% - 18rem);
   }
 
   .lg\:min-h-screen {

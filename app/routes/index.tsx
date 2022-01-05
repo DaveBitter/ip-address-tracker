@@ -131,24 +131,24 @@ const Index = () => {
           <dl className='flex flex-col lg:flex-row justify-between items-stretch w-full lg:w-auto mt-4 lg:py-12 rounded-2xl bg-white shadow-lg'>
             <div className='flex flex-col items-center max-w-md py-6 lg:py-0 px-12 lg:border-solid lg:border-r-2 lg:border-gray-200 text-center'>
               <dt className='text-gray-400 text-sm font-bold uppercase tracking-widest'>IP address</dt>
-              <dd className='text-gray-700 text-2xl font-bold'>{actionData?.ip || 'Unavailable'}</dd>
+              <dd className='text-gray-700 text-2xl font-bold max-w-full whitespace-nowrap overflow-hidden text-ellipsis' title={actionData?.ip || 'Unavailable'}>{actionData?.ip || 'Unavailable'}</dd>
             </div>
             <div className='flex flex-col items-center max-w-md py-6 lg:py-0 px-12 lg:border-solid lg:border-r-2 lg:border-gray-200 text-center'>
               <dt className='text-gray-400 text-sm font-bold uppercase tracking-widest'>Location</dt>
-              <dd className='text-gray-700 text-2xl font-bold'>{actionData?.location?.country || 'Unavailable'}</dd>
+              <dd className='text-gray-700 text-2xl font-bold max-w-full whitespace-nowrap overflow-hidden text-ellipsis' title={actionData?.location?.country || 'Unavailable'}>{actionData?.location?.country || 'Unavailable'}</dd>
             </div>
             <div className='flex flex-col items-center max-w-md py-6 lg:py-0 px-12 lg:border-solid lg:border-r-2 lg:border-gray-200 text-center'>
               <dt className='text-gray-400 text-sm font-bold uppercase tracking-widest'>Timezone</dt>
-              <dd className='text-gray-700 text-2xl font-bold'>{actionData?.location?.timezone || 'Unavailable'}</dd>
+              <dd className='text-gray-700 text-2xl font-bold max-w-full whitespace-nowrap overflow-hidden text-ellipsis' title={actionData?.location?.timezone || 'Unavailable'}>{actionData?.location?.timezone || 'Unavailable'}</dd>
             </div>
             <div className='flex flex-col items-center max-w-md py-6 lg:py-0 px-12 text-center'>
               <dt className='text-gray-400 text-sm font-bold uppercase tracking-widest'>ISP</dt>
-              <dd className='text-gray-700 text-2xl font-bold'>{actionData?.isp || 'Unavailable'}</dd>
+              <dd className='text-gray-700 text-2xl font-bold max-w-full whitespace-nowrap overflow-hidden text-ellipsis' title={actionData?.isp || 'Unavailable'}>{actionData?.isp || 'Unavailable'}</dd>
             </div>
           </dl>
         </div>
       </header >
-      <main className='h-full lg:h-[calc(100%_-_16rem)]'>
+      <main className='h-full lg:h-[calc(100%_-_18rem)]'>
         <section className='h-full'>
           <div id='map' className='relative flex justify-center items-center h-full bg-gray-200'>
             <h1 className='fade-in absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center lg:whitespace-nowrap text-gray-700 text-2xl lg:text-6xl font-bold'>{actionData?.location ? `${actionData.location.region}, ${actionData.location.country}` : ''}</h1>
