@@ -8,20 +8,20 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch
-} from "remix";
-import type { LinksFunction } from "remix";
+} from 'remix';
+import type { LinksFunction } from 'remix';
 
-import baseStyles from "./styles/base.css"
-import fadesStyles from "./styles/fades.css"
-import tailwindStyles from "./tailwind.css"
-import useServiceWorker from "./hooks/useServiceWorker";
+import baseStyles from './styles/base.css'
+import fadesStyles from './styles/fades.css'
+import tailwindStyles from './tailwind.css'
+import useServiceWorker from './hooks/useServiceWorker';
 
 export let links: LinksFunction = () => {
   return [
-    { rel: "stylesheet", href: 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' },
-    { rel: "stylesheet", href: baseStyles },
-    { rel: "stylesheet", href: fadesStyles },
-    { rel: "stylesheet", href: tailwindStyles }
+    { rel: 'stylesheet', href: 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' },
+    { rel: 'stylesheet', href: baseStyles },
+    { rel: 'stylesheet', href: fadesStyles },
+    { rel: 'stylesheet', href: tailwindStyles }
   ];
 };
 
@@ -106,7 +106,7 @@ function Document({
   useServiceWorker();
 
   return (
-    <html lang="en">
+    <html lang='en'>
       <head>
         <meta httpEquiv='Content-Type' content='text/html; charset=utf-8' />
         <meta httpEquiv='content-language' content='en' />
@@ -146,9 +146,9 @@ function Document({
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:site' content='@dave_bitter' />
         <meta name='twitter:creator' content='@dave_bitter' />
-        <meta name="twitter:title" content='IP Address Tracker' />
-        <meta name="twitter:description" content='I build this IP Address Tracker as a demo project to show how you can build an interactive web application using Remix.' />
-        <meta name="twitter:image" content={`${process.env.NODE_ENV !== 'development' ? 'https://ip-tracker.davebitter.com' : ''}/img/logo.png?v=1`} />
+        <meta name='twitter:title' content='IP Address Tracker' />
+        <meta name='twitter:description' content='I build this IP Address Tracker as a demo project to show how you can build an interactive web application using Remix.' />
+        <meta name='twitter:image' content={`${process.env.NODE_ENV !== 'development' ? 'https://ip-tracker.davebitter.com' : ''}/img/logo.png?v=1`} />
 
         <Meta />
         <Links />
@@ -157,7 +157,7 @@ function Document({
         {children}
         <ScrollRestoration />
         <Scripts />
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
   );

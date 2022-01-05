@@ -1,5 +1,5 @@
 // Libs
-import { MetaFunction, NavLink, Outlet } from "remix";
+import { MetaFunction, NavLink, Outlet } from 'remix';
 
 // Utils
 
@@ -8,10 +8,10 @@ import { MetaFunction, NavLink, Outlet } from "remix";
 // Asset links
 export const links = () => [
     {
-        rel: "preload",
-        href: "/img/streets-pattern.png",
-        as: "image",
-        type: "image/png"
+        rel: 'preload',
+        href: '/img/streets-pattern.png',
+        as: 'image',
+        type: 'image/png'
     }
 ];
 
@@ -50,7 +50,7 @@ const About = () => {
         <main className='w-full max-w-2xl min-h-screen p-4 lg:py-8 mx-auto'>
             <Outlet />
         </main>
-    </div>;
+    </div >;
 };
 
 export default About;

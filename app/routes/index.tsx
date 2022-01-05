@@ -4,16 +4,16 @@ import { ActionFunction, Form, LoaderFunction, NavLink, Outlet, useActionData, u
 /*** Asset links ***/
 export const links = () => [
   {
-    rel: "preload",
-    href: "/img/icons/arrow.svg",
-    as: "image",
-    type: "image/svg+xml"
+    rel: 'preload',
+    href: '/img/icons/arrow.svg',
+    as: 'image',
+    type: 'image/svg+xml'
   },
   {
-    rel: "preload",
-    href: "/img/streets-pattern.png",
-    as: "image",
-    type: "image/png"
+    rel: 'preload',
+    href: '/img/streets-pattern.png',
+    as: 'image',
+    type: 'image/png'
   }
 ];
 
@@ -33,7 +33,7 @@ export const action: ActionFunction = async ({
 }): Promise<Response | ActionData> => {
   const form = await request.formData();
 
-  const ip = form.get("ip") as string;
+  const ip = form.get('ip') as string;
 
   const GEO_IP_API_KEY = 'at_lhknRFKpkdlDUiZmAA7Zmt2EGsvu2';
   const { location, isp } = await fetch(`https://geo.ipify.org/api/v2/country?apiKey=${GEO_IP_API_KEY}&ipAddress=${ip}`).then(res => res.json())
@@ -116,8 +116,8 @@ const Index = () => {
           </nav>
           <h1 className='text-3xl text-white font-medium'>IP Address Tracker</h1>
           <Form className='w-full lg:w-96 relative' method='post' ref={formRef}>
-            <label htmlFor="ip" className='sr-only'>IP address or domain</label>
-            <input ref={ipInputRef} defaultValue={ipAddress} id="ip" name="ip" minLength={7} maxLength={15} size={15} pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" className='w-full p-4 pr-14 rounded-2xl text-gray-700 text-xl font-medium' placeholder='Search for any IP address or domain'></input>
+            <label htmlFor='ip' className='sr-only'>IP address or domain</label>
+            <input ref={ipInputRef} defaultValue={ipAddress} id='ip' name='ip' minLength={7} maxLength={15} size={15} pattern='^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$' className='w-full p-4 pr-14 rounded-2xl text-gray-700 text-xl font-medium' placeholder='Search for any IP address or domain'></input>
             <button type='submit' className='w-14 h-full absolute top-0 right-0 rounded-r-2xl bg-black hover:bg-gray-800 transition-colors bg-[url("/img/icons/arrow.svg")] bg-no-repeat bg-center'>
               <span className='sr-only'>Retrieve IP information</span>
             </button>

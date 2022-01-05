@@ -670,6 +670,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-\[url\(\'\/img\/streets-pattern\.png\'\)\] {
+  background-image: url('/img/streets-pattern.png');
+}
+
 .bg-\[url\(\"\/img\/streets-pattern\.png\"\)\] {
   background-image: url("/img/streets-pattern.png");
 }
@@ -884,6 +888,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   .lg\:border-gray-200 {
     --tw-border-opacity: 1;
     border-color: rgb(229 231 235 / var(--tw-border-opacity));
+  }
+
+  .lg\:bg-\[url\(\'\/img\/streets-pattern-vertical\.png\'\)\] {
+    background-image: url('/img/streets-pattern-vertical.png');
   }
 
   .lg\:bg-\[url\(\"\/img\/streets-pattern-vertical\.png\"\)\] {

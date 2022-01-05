@@ -1,6 +1,6 @@
 // Libs
 
-import { LoaderFunction, useLoaderData } from "remix";
+import { LoaderFunction, useLoaderData } from 'remix';
 
 // Utils
 
@@ -9,10 +9,10 @@ import { LoaderFunction, useLoaderData } from "remix";
 // Asset links
 export const links = () => [
     {
-        rel: "preload",
-        href: "/img/dave.jpg",
-        as: "image",
-        type: "image/jpg"
+        rel: 'preload',
+        href: '/img/dave.jpg',
+        as: 'image',
+        type: 'image/jpg'
     }
 ];
 
