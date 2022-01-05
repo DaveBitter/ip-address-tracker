@@ -13,6 +13,7 @@ import type { LinksFunction } from "remix";
 
 import fadesStyles from "./styles/fades.css"
 import tailwindStyles from "./tailwind.css"
+import useServiceWorker from "./hooks/useServiceWorker";
 
 // https://remix.run/api/app#links
 export let links: LinksFunction = () => {
@@ -47,7 +48,7 @@ export default function App() {
 export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error);
   return (
-    <Document title="Error!">
+    <Document>
       <Layout>
         <div>
           <h1>There was an error</h1>
@@ -88,7 +89,7 @@ export function CatchBoundary() {
   }
 
   return (
-    <Document title={`${caught.status} ${caught.statusText}`}>
+    <Document>
       <Layout>
         <h1>
           {caught.status}: {caught.statusText}
@@ -104,6 +105,8 @@ function Document({
 }: {
   children: React.ReactNode;
 }) {
+  useServiceWorker();
+
   return (
     <html lang="en">
       <head>
