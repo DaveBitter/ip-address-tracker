@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ActionFunction, Form, LoaderFunction, Outlet, useActionData, useLoaderData } from 'remix';
+import { ActionFunction, Form, LoaderFunction, NavLink, Outlet, useActionData, useLoaderData } from 'remix';
 
 /*** Asset links ***/
 export const links = () => [
@@ -111,8 +111,15 @@ const Index = () => {
 
   return (
     <div className='h-screen'>
-      <header className='h-96 lg:h-auto bg-[url("/img/streets-pattern.png")] bg-no-repeat bg-cover'>
+      <header className='h-96 lg:h-auto lg:p-4 bg-[url("/img/streets-pattern.png")] bg-no-repeat bg-cover'>
         <div className='relative flex flex-col gap-6 mx-6 lg:mx-0 justify-center items-center h-64 translate-y-48 lg:translate-y-12' style={{ zIndex: 500 }}>
+          <nav className='w-full'>
+            <ul className='flex justify-end gap-4 lg:gap-2'>
+              <li>
+                <NavLink className='text-white text-md lg:text-lg font-bold' to='/about/this-project' prefetch='intent'>About</NavLink>
+              </li>
+            </ul>
+          </nav>
           <h1 className='text-3xl text-white font-medium'>IP Address Tracker</h1>
           <Form className='w-full lg:w-96 relative' method='post' ref={formRef}>
             <label htmlFor="ip" className='sr-only'>IP address or domain</label>

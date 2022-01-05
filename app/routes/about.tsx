@@ -23,8 +23,8 @@ export const links = () => [
 
 // Component
 const About = () => {
-    return <div className='flex flex-col lg:flex-row justify-stretch items-center w-full lg:min-h-screen'>
-        <aside className='bg-gray-200 w-full lg:h-screen lg:w-64 bg-[url("/img/streets-pattern.png")] lg:bg-[url("/img/streets-pattern-vertical.png")] bg-no-repeat bg-cover'>
+    return <div className='flex flex-col lg:flex-row justify-stretch items-center lg:items-start w-full lg:min-h-screen'>
+        <aside className='bg-gray-200 w-full lg:h-screen lg:w-64 sticky top-0 bg-[url("/img/streets-pattern.png")] lg:bg-[url("/img/streets-pattern-vertical.png")] bg-no-repeat bg-cover'>
             <nav>
                 <ul className='flex gap-4 lg:gap-2 lg:flex-col p-4'>
                     <li>
@@ -34,10 +34,10 @@ const About = () => {
                         <NavLink className='text-white text-md lg:text-lg font-bold' to='/about' prefetch='intent'>About</NavLink>
                         <ul className='flex lg:flex-col gap-2 pt-2'>
                             <li>
-                                <NavLink className={({ isActive }) => `lg:ml-4 text-white text-sm lg:text-md font-medium ${isActive && 'border-solid border-b-2 border-white'}`} to='remix' prefetch='intent'>Remix</NavLink>
+                                <NavLink className={({ isActive }) => `lg:ml-4 text-white text-sm lg:text-md font-medium ${isActive && 'border-solid border-b-2 border-white'}`} to='this-project' prefetch='intent'>This project</NavLink>
                             </li>
                             <li>
-                                <NavLink className={({ isActive }) => `lg:ml-4 text-white text-sm lg:text-md font-medium ${isActive && 'border-solid border-b-2 border-white'}`} to='this-project' prefetch='intent'>This project</NavLink>
+                                <NavLink className={({ isActive }) => `lg:ml-4 text-white text-sm lg:text-md font-medium ${isActive && 'border-solid border-b-2 border-white'}`} to='remix' prefetch='intent'>Remix</NavLink>
                             </li>
                             <li>
                                 <NavLink className={({ isActive }) => `lg:ml-4 text-white text-sm lg:text-md font-medium ${isActive && 'border-solid border-b-2 border-white'}`} to='me' prefetch='intent'>Me</NavLink>
