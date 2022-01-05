@@ -1,5 +1,5 @@
 // Libs
-import { NavLink, Outlet } from "remix";
+import { MetaFunction, NavLink, Outlet } from "remix";
 
 // Utils
 
@@ -20,6 +20,12 @@ export const links = () => [
         type: "image/png"
     }
 ];
+
+export const meta: MetaFunction = () => {
+    return {
+        title: 'IP Address Tracker | About'
+    };
+};
 
 // Component
 const About = () => {

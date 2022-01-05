@@ -573,10 +573,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   flex-direction: column;
 }
 
-.items-end {
-  align-items: flex-end;
-}
-
 .items-center {
   align-items: center;
 }
@@ -783,10 +779,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 @media (min-width: 1024px) {
-  .lg\:m-8 {
-    margin: 2rem;
-  }
-
   .lg\:mx-0 {
     margin-left: 0px;
     margin-right: 0px;
@@ -870,10 +862,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     background-image: url("/img/streets-pattern-vertical.png");
   }
 
-  .lg\:p-8 {
-    padding: 2rem;
-  }
-
   .lg\:p-4 {
     padding: 1rem;
   }
@@ -891,14 +879,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   .lg\:py-0 {
     padding-top: 0px;
     padding-bottom: 0px;
-  }
-
-  .lg\:pt-8 {
-    padding-top: 2rem;
-  }
-
-  .lg\:pr-8 {
-    padding-right: 2rem;
   }
 
   .lg\:text-lg {
