@@ -15,7 +15,6 @@ import fadesStyles from "./styles/fades.css"
 import tailwindStyles from "./tailwind.css"
 import useServiceWorker from "./hooks/useServiceWorker";
 
-// https://remix.run/api/app#links
 export let links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' },
@@ -32,8 +31,6 @@ export const meta: MetaFunction = () => {
   };
 };
 
-// https://remix.run/api/conventions#default-export
-// https://remix.run/api/conventions#route-filenames
 export default function App() {
   return (
     <Document>
@@ -44,7 +41,6 @@ export default function App() {
   );
 }
 
-// https://remix.run/docs/en/v1/api/conventions#errorboundary
 export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error);
   return (

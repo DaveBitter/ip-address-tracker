@@ -550,12 +550,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-width: 28rem;
 }
 
-.max-w-xs {
-  max-width: 20rem;
-}
-
 .max-w-full {
   max-width: 100%;
+}
+
+.max-w-xs {
+  max-width: 20rem;
 }
 
 .translate-y-48 {
@@ -814,10 +814,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .lg\:h-auto {
     height: auto;
-  }
-
-  .lg\:h-\[calc\(100\%_-_16rem\)\] {
-    height: calc(100% - 16rem);
   }
 
   .lg\:h-\[calc\(100\%_-_18rem\)\] {
