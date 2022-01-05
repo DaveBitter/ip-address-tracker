@@ -11,6 +11,7 @@ import {
 } from "remix";
 import type { LinksFunction } from "remix";
 
+import baseStyles from "./styles/base.css"
 import fadesStyles from "./styles/fades.css"
 import tailwindStyles from "./tailwind.css"
 import useServiceWorker from "./hooks/useServiceWorker";
@@ -18,6 +19,7 @@ import useServiceWorker from "./hooks/useServiceWorker";
 export let links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' },
+    { rel: "stylesheet", href: baseStyles },
     { rel: "stylesheet", href: fadesStyles },
     { rel: "stylesheet", href: tailwindStyles }
   ];
@@ -27,7 +29,7 @@ export const meta: MetaFunction = () => {
   return {
     title: 'IP Address Tracker',
     description:
-      'I build this IP Address Tracker as a demo project to show how you can build an interactive webapplication using Remix.'
+      'I build this IP Address Tracker as a demo project to show how you can build an interactive web application using Remix.'
   };
 };
 
@@ -132,7 +134,7 @@ function Document({
 
         <meta property='og:image' content={`${process.env.NODE_ENV !== 'development' ? 'https://ip-tracker.davebitter.com' : ''}/img/logo.png?v=1`} />
         <meta property='og:title' content='IP Address Tracker' />
-        <meta property='og:description' content='I build this IP Address Tracker as a demo project to show how you can build an interactive webapplication using Remix.' />
+        <meta property='og:description' content='I build this IP Address Tracker as a demo project to show how you can build an interactive web application using Remix.' />
         <meta property='og:site_name' content='IP Address Tracker' />
         <meta property='og:locale' content='en' />
         <meta property='og:type' content='website' />
@@ -145,7 +147,7 @@ function Document({
         <meta name='twitter:site' content='@dave_bitter' />
         <meta name='twitter:creator' content='@dave_bitter' />
         <meta name="twitter:title" content='IP Address Tracker' />
-        <meta name="twitter:description" content='I build this IP Address Tracker as a demo project to show how you can build an interactive webapplication using Remix.' />
+        <meta name="twitter:description" content='I build this IP Address Tracker as a demo project to show how you can build an interactive web application using Remix.' />
         <meta name="twitter:image" content={`${process.env.NODE_ENV !== 'development' ? 'https://ip-tracker.davebitter.com' : ''}/img/logo.png?v=1`} />
 
         <Meta />

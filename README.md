@@ -1,53 +1,49 @@
-# Welcome to Remix!
+# IP Address Tracker
 
-- [Remix Docs](https://remix.run/docs)
+![IP Address Tracker web application](docs/ip-address-tracker.png)
 
-## Development
+> Head over to [ip.davebitter.com](https://ip.davebitter.com) for a demo.
 
-From your terminal:
+I build this IP Address Tracker as a demo project to show how you can build an interactive web application using [Remix](https://remix.run/docs). Head over to [About>Remix](https://ip.davebitter.com/about/remix) for more information on the framework itself.
 
-```sh
-npm run dev
-```
+I use this web application as part of a talk on the basics of Remix. Head over to [my website](https://davebitter.com) for an overview of the talks I give and/or shoot me a message at [daveybitter@gmail.com](mailto:daveybitter@gmail.com) if you are interested in me giving this talk at your event!
 
-This starts your app in development mode, rebuilding assets on file changes.
+This application is a more extensive version of [this frontend challenge by frontendmentor.io](https://www.frontendmentor.io/challenges/ip-address-tracker-I8-0yYAH0/). The goal is to create a nicely designed web application that will make some calls to an API to retrieve information for a passed IP address and display an interactive map with the retrieved location.
 
-## Deployment
+## APIs
+IP Address Tracker uses several APIs to retrieve data.
+- [ipify API](https://www.ipify.org/) to retrieve the current user's IP as a good default
+- [GeoIP API](https://geo.ipify.org) to retrieve information on submitted IP
+- [leaflet-geosearch](https://github.com/smeijer/leaflet-geosearch) to retrieve information on location
 
-First, build your app for production:
+## Getting started
 
-```sh
-npm run build
-```
+### Run development environment
+- `yarn dev` or `npm run dev` - starts the development environment with auto reloading and all that good stuff. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Then run the app in production mode:
+- `yarn dev:netlify` or `npm run dev:netlify` - starts the development environment as it would be ran on Netlify. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-```sh
-npm start
-```
+### Scripts
+Besides these development scripts, there are many more scripts set up:
 
-Now you'll need to pick a host to deploy it to.
+* `clean` - Cleans build folder
+* `deploy:netlify` - Deploys to Netlify
+* `postinstall` - Sets up Node
+* `start` - Starts Remix server
 
-### DIY
+### Tech stack
+#### Remix
+IP Address Tracker uses [Remix](https://remix.run/docs) to
+* provide SSR [React.js](https://reactjs.org/). Pages are automatically optimised to deliver the best experience.
+* handle routing
+* generate builds
+* and more
 
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
+#### TypeScript
+IP Address Tracker used [TypeScript](https://www.typescriptlang.org/) for static checking and documentation. You can view the Typescript config in [./tsconfig.json](./tsconfig.json).
 
-Make sure to deploy the output of `remix build`
+#### Tailwind
+IP Address Tracker used [Tailwind](https://tailwindcss.com/) to make it easy to implement the design for this challenge.
 
-- `build/`
-- `public/build/`
-
-### Using a Template
-
-When you ran `npx create-remix@latest` there were a few choices for hosting. You can run that again to create a new project, then copy over your `app/` folder to the new project that's pre-configured for your target server.
-
-```sh
-cd ..
-# create a new project, and pick a pre-configured host
-npx create-remix@latest
-cd my-new-remix-app
-# remove the new project's app (not the old one!)
-rm -rf app
-# copy your app over
-cp -R ../my-old-remix-app/app app
-```
+#### Netflify (CI/CD)
+IP Address Tracker uses [Netlify](https://www.netlify.com/) (♥️) to build, deploy and optimise.

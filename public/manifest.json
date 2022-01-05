@@ -1,7 +1,7 @@
 {
     "name": "IP Address Tracker",
     "short_name": "IP Address Tracker",
-    "description": "I build this IP Address Tracker as a demo project to show how you can build an interactive webapplication using Remix.",
+    "description": "I build this IP Address Tracker as a demo project to show how you can build an interactive web application using Remix.",
     "scope": "/",
     "start_url": "/",
     "display": "standalone",
