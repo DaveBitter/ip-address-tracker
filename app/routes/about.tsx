@@ -27,7 +27,7 @@ const SideNavLinks: Array<SideNavLinkType> = [
     {
         label: 'About', to: '/about', subLinks: [
             { label: 'This project', to: '/about/this-project' },
-            { label: 'Remix', to: '/about/remixt' },
+            { label: 'Remix', to: '/about/remix' },
             { label: 'Me', to: '/about/me' }
         ]
     }
