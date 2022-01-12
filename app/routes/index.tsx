@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ActionFunction, LoaderFunction, Outlet, useActionData, useLoaderData } from 'remix';
+import { ActionFunction, LoaderFunction, Outlet, useActionData, useLoaderData, useTransition } from 'remix';
 
 import SearchHeader, { SearchHeaderDataType } from '~/components/SearchHeader/SearchHeader';
 
@@ -62,6 +62,7 @@ let hasAutoSubmitted = false;
 const Index = () => {
   const actionData = useActionData<ActionData | undefined>();
   const loaderData = useLoaderData<LoaderData>();
+  const { state: formState } = useTransition();
 
   const ipAddress = actionData?.ip || loaderData?.userIP || ''
 
@@ -114,7 +115,7 @@ const Index = () => {
 
   return (
     <div className='h-screen'>
-      <SearchHeader data={searchHeaderData} defaultSearchInputValue={ipAddress} refs={{ formRef, inputRef }} />
+      <SearchHeader data={searchHeaderData} defaultSearchInputValue={ipAddress} formState={formState} refs={{ formRef, inputRef }} />
 
       <main className='h-full lg:h-[calc(100%_-_18rem)]'>
         <section className='h-full'>

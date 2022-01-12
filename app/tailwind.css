@@ -678,8 +678,68 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-image: url("/img/icons/arrow.svg");
 }
 
+.bg-\[url\(\"\/img\/icons\/cloud\.svg\"\)\] {
+  background-image: url("/img/icons/cloud.svg");
+}
+
+.bg-\[url\(\"\/img\/icons\/cloud\.svg\?v\=1\"\)\] {
+  background-image: url("/img/icons/cloud.svg?v=1");
+}
+
+.bg-\[url\(\"\/img\/icons\/arrow\.svg\?v\=1\"\)\] {
+  background-image: url("/img/icons/arrow.svg?v=1");
+}
+
+.bg-\[url\(\"\/img\/icons\/arrow\.svg\?v\=2\"\)\] {
+  background-image: url("/img/icons/arrow.svg?v=2");
+}
+
+.bg-\[url\(\"\/img\/icons\/arrow\.svg\?v\=3\"\)\] {
+  background-image: url("/img/icons/arrow.svg?v=3");
+}
+
+.bg-\[url\(\"\/img\/icons\/cloud\.svg\?v\=3\"\)\] {
+  background-image: url("/img/icons/cloud.svg?v=3");
+}
+
+.bg-\[url\(\"\/img\/icons\/download\.svg\?v\=3\"\)\] {
+  background-image: url("/img/icons/download.svg?v=3");
+}
+
+.bg-\[url\(\"\/img\/icons\/upload\.svg\?v\=3\"\)\] {
+  background-image: url("/img/icons/upload.svg?v=3");
+}
+
+.bg-\[url\(\"\/img\/icons\/submit\.svg\?v\=3\"\)\] {
+  background-image: url("/img/icons/submit.svg?v=3");
+}
+
+.bg-\[url\(\"\/img\/icons\/\$\{iconMappedToState\[formState\]\}\.svg\"\)\] {
+  background-image: url("/img/icons/${iconMappedToState[formState]}.svg");
+}
+
+.bg-\[url\(\"\/img\/icons\/\$\{iconMappedToState\[formState\]\}\.svg\?v\=14\"\)\] {
+  background-image: url("/img/icons/${iconMappedToState[formState]}.svg?v=14");
+}
+
+.bg-\[url\(\"\/img\/icons\/submit\.svg\"\)\] {
+  background-image: url("/img/icons/submit.svg");
+}
+
+.bg-\[url\(\"\/img\/icons\/upload\.svg\"\)\] {
+  background-image: url("/img/icons/upload.svg");
+}
+
+.bg-\[url\(\"\/img\/icons\/download\.svg\"\)\] {
+  background-image: url("/img/icons/download.svg");
+}
+
 .bg-cover {
   background-size: cover;
+}
+
+.bg-auto {
+  background-size: auto;
 }
 
 .bg-center {
@@ -793,6 +853,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .transition-colors {
   transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
